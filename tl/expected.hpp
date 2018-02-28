@@ -30,20 +30,21 @@
 #define TL_EXPECTED_MSVC2015_CONSTEXPR constexpr
 #endif
 
-#if (defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ <= 9 &&              \
+#if (!defined(TL_EXPECTED_GCC49) &&                                            \
+     defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ <= 9 &&              \
      !defined(__clang__))
 /// \exclude
 #define TL_EXPECTED_GCC49
 #endif
 
-#if (defined(__GNUC__) && __GNUC__ == 5 && __GNUC_MINOR__ <= 4 &&              \
+#if (!defined(TL_EXPECTED_GCC49) &&                                            \
+     defined(__GNUC__) && __GNUC__ == 5 && __GNUC_MINOR__ <= 4 &&              \
      !defined(__clang__))
 /// \exclude
 #define TL_EXPECTED_GCC54
 #endif
 
-#if (defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ <= 9 &&              \
-     !defined(__clang__))
+#if (defined(TL_EXPECTED_GCC49))
 // GCC < 5 doesn't support overloading on const&& for member functions
 /// \exclude
 #define TL_EXPECTED_NO_CONSTRR
