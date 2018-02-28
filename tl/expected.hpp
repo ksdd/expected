@@ -30,6 +30,8 @@
 #define TL_EXPECTED_MSVC2015_CONSTEXPR constexpr
 #endif
 
+#define TL_EXPECTED_GCC49 // enforce this for now
+
 #if (!defined(TL_EXPECTED_GCC49) &&                                            \
      defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ <= 9 &&              \
      !defined(__clang__))
