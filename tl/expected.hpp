@@ -1928,11 +1928,9 @@ template <class Exp, class F,
                                               *std::declval<Exp>())),
           detail::enable_if_t<!std::is_void<Ret>::value> * = nullptr>
 constexpr detail::decay_t<Exp> or_else_impl(Exp &&exp, F &&f) {
-  if (exp.has_value()) {
-    return std::forward<Exp>(exp);
-  }
-
-  return detail::invoke(std::forward<F>(f), *std::forward<Exp>(exp));
+  return exp.has_value()
+             ? std::forward<Exp>(exp)
+             : detail::invoke(std::forward<F>(f), *std::forward<Exp>(exp));
 }
 
 template <class Exp, class F,
