@@ -30,7 +30,11 @@
 #define TL_EXPECTED_MSVC2015_CONSTEXPR constexpr
 #endif
 
-#define TL_EXPECTED_GCC49 // enforce this for now
+#ifdef __GLIBCXX__
+  #if (__GLIBCXX__ <= 20160726)
+    #define TL_EXPECTED_GCC49
+  #endif
+#endif
 
 #if (!defined(TL_EXPECTED_GCC49) &&                                            \
      defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ <= 9 &&              \
