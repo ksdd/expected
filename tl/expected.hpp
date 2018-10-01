@@ -30,7 +30,7 @@
 #define TL_EXPECTED_MSVC2015_CONSTEXPR constexpr
 #endif
 
-#ifdef __GLIBCXX__
+#if defined(__GLIBCXX__) && !defined(_GLIBCXX14_CONSTEXPR)
   #if (__GLIBCXX__ <= 20160726)
     #define TL_EXPECTED_GCC49
   #endif
