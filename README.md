@@ -1,6 +1,7 @@
 # expected
 Single header implementation of `std::expected` with functional-style extensions.
 
+[![Documentation Status](https://readthedocs.org/projects/tl-docs/badge/?version=latest)](https://tl.tartanllama.xyz/en/latest/?badge=latest)
 Clang + GCC: [![Linux Build Status](https://travis-ci.org/TartanLlama/expected.png?branch=master)](https://travis-ci.org/TartanLlama/expected)
 MSVC: [![Windows Build Status](https://ci.appveyor.com/api/projects/status/k5x00xa11y3s5wsg?svg=true)](https://ci.appveyor.com/project/TartanLlama/expected)
 
@@ -40,8 +41,6 @@ tl::expected<image,fail_reason> get_cute_cat (const image& img) {
            .map(add_rainbow);
 }
 ```
-
-Full documentation available at [expected.tartanllama.xyz](https://expected.tartanllama.xyz)
 
 The interface is the same as `std::expected` as proposed in [p0323r3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0323r3.pdf), but the following member functions are also defined. Explicit types are for clarity.
 
