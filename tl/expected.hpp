@@ -34,26 +34,34 @@
 #define TL_EXPECTED_MSVC2015_CONSTEXPR constexpr
 #endif
 
-#if (defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ <= 9 &&              \
+#if defined(__GLIBCXX__) && !defined(_GLIBCXX14_CONSTEXPR)
+  #if (__GLIBCXX__ <= 20160726)
+    #define TL_EXPECTED_GCC49
+  #endif
+#endif
+
+#if (!defined(TL_EXPECTED_GCC49) &&                                            \
+     defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ <= 9 &&              \
      !defined(__clang__))
 /// \exclude
 #define TL_EXPECTED_GCC49
 #endif
 
-#if (defined(__GNUC__) && __GNUC__ == 5 && __GNUC_MINOR__ <= 4 &&              \
+#if (!defined(TL_EXPECTED_GCC49) &&                                            \
+     defined(__GNUC__) && __GNUC__ == 5 && __GNUC_MINOR__ <= 4 &&              \
      !defined(__clang__))
 /// \exclude
 #define TL_EXPECTED_GCC54
 #endif
 
-#if (defined(__GNUC__) && __GNUC__ == 5 && __GNUC_MINOR__ <= 5 &&              \
+#if (!defined(TL_EXPECTED_GCC49) &&                                            \
+     defined(__GNUC__) && __GNUC__ == 5 && __GNUC_MINOR__ <= 5 &&              \
      !defined(__clang__))
 /// \exclude
 #define TL_EXPECTED_GCC55
 #endif
 
-#if (defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ <= 9 &&              \
-     !defined(__clang__))
+#if (defined(TL_EXPECTED_GCC49))
 // GCC < 5 doesn't support overloading on const&& for member functions
 /// \exclude
 #define TL_EXPECTED_NO_CONSTRR
@@ -831,7 +839,7 @@ struct expected_operations_base : expected_storage_base<T, E> {
 #endif
 
   TL_EXPECTED_11_CONSTEXPR void destroy_val() {
-	get().~T();
+    get().~T();
   }
 };
 
@@ -886,7 +894,7 @@ struct expected_operations_base<void, E> : expected_storage_base<void, E> {
 #endif
 
   TL_EXPECTED_11_CONSTEXPR void destroy_val() {
-	  //no-op
+    //no-op
   }
 };
 
